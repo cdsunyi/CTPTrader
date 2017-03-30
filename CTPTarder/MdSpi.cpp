@@ -128,7 +128,7 @@ void MdSpi::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin, CThostFtd
 ///登出请求响应
 void MdSpi::OnRspUserLogout(CThostFtdcUserLogoutField *pUserLogout, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
 {
-
+	log_Md.log("OnRspUserLogout----系统已经登出！");
 }
 
 ///错误应答
@@ -196,7 +196,7 @@ void MdSpi::OnRspSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstr
 ///取消订阅行情应答
 void MdSpi::OnRspUnSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
 {
-
+	log_Md.log("OnRspUnSubMarketData-----行情订阅已经取消！");
 }
 
 ///订阅询价应答
@@ -214,6 +214,103 @@ void MdSpi::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificIn
 ///深度行情通知
 void MdSpi::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData)
 {
+	//log_Md.log("深度行情通知");
+	
+	///交易日
+	string	TradingDay = pDepthMarketData->TradingDay;
+	///合约代码
+	string	InstrumentID = pDepthMarketData->InstrumentID;
+	///交易所代码
+	string	ExchangeID = pDepthMarketData->ExchangeID;
+	///合约在交易所的代码
+	string	ExchangeInstID = pDepthMarketData->ExchangeInstID;
+	///最新价
+	double	LastPrice = pDepthMarketData->LastPrice;
+	///上次结算价
+	double	PreSettlementPrice = pDepthMarketData->PreSettlementPrice;
+	///昨收盘
+	double	PreClosePrice = pDepthMarketData->PreClosePrice;
+	///昨持仓量
+	double	PreOpenInterest = pDepthMarketData->PreOpenInterest;
+	///今开盘
+	double	OpenPrice = pDepthMarketData->OpenPrice;
+	///最高价
+	double	HighestPrice = pDepthMarketData->HighestPrice;
+	///最低价
+	double	LowestPrice = pDepthMarketData->LowestPrice;
+	///数量
+	double	Volume = pDepthMarketData->Volume;
+	///成交金额
+	double	Turnover = pDepthMarketData->Turnover;
+	///持仓量
+	double	OpenInterest = pDepthMarketData->OpenInterest;
+	///今收盘
+	double	ClosePrice = pDepthMarketData->ClosePrice;
+	///本次结算价
+	double	SettlementPrice = pDepthMarketData->SettlementPrice;
+	///涨停板价
+	double	UpperLimitPrice = pDepthMarketData->UpperLimitPrice;
+	///跌停板价
+	double	LowerLimitPrice = pDepthMarketData->LowerLimitPrice;
+	///昨虚实度
+	double	PreDelta = pDepthMarketData->PreDelta;
+	///今虚实度
+	double	CurrDelta = pDepthMarketData->CurrDelta;
+	///最后修改时间
+	string	UpdateTime = pDepthMarketData->UpdateTime;
+	///最后修改毫秒
+	int	UpdateMillisec = pDepthMarketData->UpdateMillisec;
+	///申买价一
+	double	BidPrice1 = pDepthMarketData->BidPrice1;
+	///申买量一
+	int	BidVolume1 = pDepthMarketData->BidVolume1;
+	///申卖价一
+	double	AskPrice1 = pDepthMarketData->AskPrice1;
+	///申卖量一
+	int	AskVolume1 = pDepthMarketData->AskVolume1;
+	///申买价二
+	double	BidPrice2 = pDepthMarketData->BidPrice2;
+	///申买量二
+	int	BidVolume2 = pDepthMarketData->BidVolume2;
+	///申卖价二
+	double	AskPrice2 = pDepthMarketData->AskPrice2;
+	///申卖量二
+	int	AskVolume2 = pDepthMarketData->AskVolume2;
+	///申买价三
+	double	BidPrice3 = pDepthMarketData->BidPrice3;
+	///申买量三
+	int	BidVolume3 = pDepthMarketData->BidVolume3;
+	///申卖价三
+	double	AskPrice3 = pDepthMarketData->AskPrice3;
+	///申卖量三
+	int	AskVolume3 = pDepthMarketData->AskVolume3;
+	///申买价四
+	double	BidPrice4 = pDepthMarketData->BidPrice4;
+	///申买量四
+	int	BidVolume4 = pDepthMarketData->BidVolume4;
+	///申卖价四
+	double	AskPrice4 = pDepthMarketData->AskPrice4;
+	///申卖量四
+	int	AskVolume4 = pDepthMarketData->AskVolume4;
+	///申买价五
+	double	BidPrice5 = pDepthMarketData->BidPrice5;
+	///申买量五
+	int	BidVolume5 = pDepthMarketData->BidVolume5;
+	///申卖价五
+	double	AskPrice5 = pDepthMarketData->AskPrice5;
+	///申卖量五
+	int	AskVolume5 = pDepthMarketData->AskVolume5;
+	///当日均价
+	double	AveragePrice = pDepthMarketData->AveragePrice;
+	///业务日期
+	string	ActionDay = pDepthMarketData->ActionDay;
+	
+
+	OpreationFile Marketfile;
+	fstream Mkfile;
+	Marketfile.openfile(Mkfile,"market.txt");
+	Marketfile.writeInfo(Mkfile, info);
+	Marketfile.closefile(Mkfile);
 
 }
 

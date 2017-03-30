@@ -52,6 +52,9 @@ extern char* p_TMInstrumentID[];
 //合约数
 extern int p_InstrumentNum;
 
+//合约 test
+//extern multiset <string> TraderInstrumentID_test;
+
 TThostFtdcBrokerIDType	BROKER_ID = "2358";				// 经纪公司代码
 TThostFtdcInvestorIDType INVESTOR_ID = "590195425";			// 投资者代码
 TThostFtdcPasswordType  PASSWORD = "095891";			// 用户密码
@@ -129,6 +132,12 @@ void TraderSqi::OnRspUserLogout(CThostFtdcUserLogoutField *pUserLogout, CThostFt
 void TraderSqi::OnRspQryInstrument(CThostFtdcInstrumentField *pInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
 {
 	traderInstrumentNum++;
+
+	//存储合约
+	setTraderInstrumentIDinfo(pInstrument->InstrumentID);
+	//合约 test
+	//TraderInstrumentID_test.insert(pInstrument->InstrumentID);
+
 	if (bIsLast)
 	{
 		//cout << "请求查询合约数：" << traderInstrumentNum << endl;
@@ -157,12 +166,6 @@ void TraderSqi::OnRspQryInstrument(CThostFtdcInstrumentField *pInstrument, CThos
 		}
 		p_InstrumentNum = traderInstrumentNum;
 	}
-	else
-	{
-		//存储合约
-		setTraderInstrumentIDinfo(pInstrument->InstrumentID);
-	}
-
 
 }
 

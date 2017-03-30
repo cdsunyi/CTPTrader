@@ -61,7 +61,8 @@ int iRequestID = 0;
 // 行情请求编号
 int iRequestID_md = 0;
 
-
+//合约 test
+//multiset <string> TraderInstrumentID_test;
 
 int main(int argc, char* argv[])
 {

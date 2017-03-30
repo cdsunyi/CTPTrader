@@ -33,6 +33,9 @@
     <ClCompile Include="transition.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="OpreationFile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -48,6 +51,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="transition.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="OpreationFile.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

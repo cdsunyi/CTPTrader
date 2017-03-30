@@ -1,7 +1,7 @@
 /***********************************************************************
 * 描述:
 * 此文件用于的目的
-*
+* 数据类型的转换
 *
 *
 * 全局变量:
@@ -46,6 +46,15 @@ public:
 	trasition();
 	~trasition();
 
+	//************************************
+	// Method:    intToString
+	// FullName:  trasition::intToString
+	// Date:      2017/03/30
+	// Access:    public 
+	// Returns:   std::string
+	// declaration:int 转string 型 
+	// Parameter: int value
+	//************************************
 	string intToString(int value);
 private:
 

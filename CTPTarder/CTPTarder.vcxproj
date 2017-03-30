@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ctpLog.cpp" />
+    <ClCompile Include="OpreationFile.cpp" />
     <ClCompile Include="TraderSpi.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MdSpi.cpp" />
@@ -20,6 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ctpLog.h" />
+    <ClInclude Include="OpreationFile.h" />
     <ClInclude Include="TraderSpi.h" />
     <ClInclude Include="MdSpi.h" />
     <ClInclude Include="stdafx.h" />

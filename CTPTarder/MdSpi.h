@@ -42,6 +42,7 @@
 #include "ThostFtdcMdApi.h"
 #include "ctpLog.h"
 #include "transition.h"
+#include "OpreationFile.h"
 
 class MdSpi :public CThostFtdcMdSpi
 {

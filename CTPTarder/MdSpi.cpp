@@ -48,6 +48,9 @@ extern int iRequestID_md;
 extern char* p_TMInstrumentID[];
 extern int p_InstrumentNum;
 
+//合约 test
+//extern multiset <string> TraderInstrumentID_test;
+
 TThostFtdcBrokerIDType	BROKER_ID_MD = "2358";				// 经纪公司代码
 TThostFtdcInvestorIDType INVESTOR_ID_MD = "590135490";			// 投资者代码
 TThostFtdcPasswordType  PASSWORD_MD = "654321";			// 用户密码
@@ -146,9 +149,47 @@ void MdSpi::OnRspSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstr
 	if (bIsLast)
 	{
 		log_Md.log("一共响应订阅行情应答数为：" + intTostr.intToString(oninstumentnum));
+		//行情写入 txt文件
+		/*OpreationFile file;
+		fstream textFile;
+		if (!file.openfile(textFile, "lack.txt"))
+		{
+			log_Md.log("lack.txt文件打开失败!");
+		}
+		multiset <string>::iterator it;
+		for (it = TraderInstrumentID_test.begin(); it != TraderInstrumentID_test.end();it++)
+		{
+			file.writeInfo(textFile, *it);
+		}
+		file.writeInfo(textFile, "**********************************");
+		file.closefile(textFile);*/
 	}
 	string instrument = pSpecificInstrument->InstrumentID;
 	//log_Md.log("应答"+instrument);
+
+	//test
+	/*int tSize = TraderInstrumentID_test.size();
+
+	multiset <string> ::iterator p;
+
+	p = TraderInstrumentID_test.find(instrument);
+
+	if (p == TraderInstrumentID_test.end())
+	{
+	OpreationFile file;
+	fstream textFile;
+	if (!file.openfile(textFile, "t.txt"))
+	{
+	log_Md.log("t.txt文件打开失败!");
+	}
+	file.writeInfo(textFile, instrument);
+	file.closefile(textFile);
+	}
+	else
+	{
+	TraderInstrumentID_test.erase(instrument);
+	}*/
+
 	oninstumentnum++;
 }
 

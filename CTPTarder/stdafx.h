@@ -53,5 +53,8 @@
 #include "ThostFtdcMdApi.h"
 #include <sstream>
 #include <stdio.h>
+#include <set>
+#include <fstream>
+
 
 using namespace std;

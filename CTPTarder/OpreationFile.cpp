@@ -79,6 +79,19 @@ bool OpreationFile::writeInfo(fstream &files,string info)
 	}
 }
 
+bool OpreationFile::writeInfoDouble(fstream &files, double info)
+{
+	if (files.fail())
+	{
+		return false;
+	}
+	else
+	{
+		files << info << endl;
+		return true;
+	}
+}
+
 void OpreationFile::closefile(fstream &files)
 {
 	files.close();
@@ -88,3 +101,18 @@ void OpreationFile::readinfo()
 {
 
 }
+
+bool OpreationFile::writeInfoDouble2(fstream &files, double info)
+{
+	if (files.fail())
+	{
+		return false;
+	}
+	else
+	{
+		files << setprecision(18) << info << endl;
+		return true;
+	}
+}
+
+

@@ -56,3 +56,17 @@ std::string trasition::intToString(int value)
 	sstream >> str;
 	return str;
 }
+
+std::string trasition::doubleToString(double value)
+{
+	string str;
+	stringstream sstream;
+	sstream << setprecision(18) << value;
+	sstream >> str;
+	return str;
+
+	//char buf[2000];
+	//sprintf_s(buf, sizeof(buf), "%f", value);
+	//return string(buf);
+
+}

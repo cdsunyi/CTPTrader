@@ -73,6 +73,19 @@ public:
 	//************************************
 	bool writeInfo(fstream &files, string info);
 
+	//************************************
+	// Method:    writeInfoDouble
+	// FullName:  OpreationFile::writeInfoDouble
+	// Date:      2017/03/31
+	// Access:    public 
+	// Returns:   bool
+	// declaration: 写入double型的数据
+	// Parameter: fstream & files
+	// Parameter: double info
+	//************************************
+	bool writeInfoDouble(fstream &files, double info);
+
+	bool writeInfoDouble2(fstream &files, double info);
 
 	//************************************
 	// Method:    readinfo

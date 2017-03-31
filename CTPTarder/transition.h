@@ -56,6 +56,17 @@ public:
 	// Parameter: int value
 	//************************************
 	string intToString(int value);
+
+	//************************************
+	// Method:    doubleToString
+	// FullName:  trasition::doubleToString
+	// Date:      2017/03/31
+	// Access:    public 
+	// Returns:   std::string
+	// declaration:double ×ªstring ÐÍ 
+	// Parameter: double value
+	//************************************
+	string doubleToString(double value);
 private:
 
 };

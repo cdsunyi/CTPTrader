@@ -57,6 +57,9 @@ TThostFtdcPasswordType  PASSWORD_MD = "654321";			// 用户密码
 //相应的行情合约数量
 int oninstumentnum = 0;
 
+//获取行情数量
+int getMarketnum = 0;
+
 MdSpi::MdSpi()
 {
 	this->log_Md.setlogType("Md---------->:");
@@ -103,7 +106,6 @@ void MdSpi::OnHeartBeatWarning(int nTimeLapse)
 	string logstr = "OnHeartBeatWarning";
 	log_Md.log(logstr);
 }
-
 
 ///登录请求响应
 void MdSpi::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
@@ -215,7 +217,7 @@ void MdSpi::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificIn
 void MdSpi::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData)
 {
 	//log_Md.log("深度行情通知");
-	
+	getMarketnum++;
 	///交易日
 	string	TradingDay = pDepthMarketData->TradingDay;
 	///合约代码
@@ -225,19 +227,19 @@ void MdSpi::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketDat
 	///合约在交易所的代码
 	string	ExchangeInstID = pDepthMarketData->ExchangeInstID;
 	///最新价
-	double	LastPrice = pDepthMarketData->LastPrice;
+	double	LastPrice = (pDepthMarketData->LastPrice > 1000000000000000) ? 0 : pDepthMarketData->LastPrice;
 	///上次结算价
-	double	PreSettlementPrice = pDepthMarketData->PreSettlementPrice;
+	double	PreSettlementPrice = (pDepthMarketData->PreSettlementPrice> 1000000000000000) ? 0 : pDepthMarketData->PreSettlementPrice;
 	///昨收盘
-	double	PreClosePrice = pDepthMarketData->PreClosePrice;
+	double	PreClosePrice = (pDepthMarketData->PreClosePrice> 1000000000000000) ? 0 : pDepthMarketData->PreClosePrice;
 	///昨持仓量
-	double	PreOpenInterest = pDepthMarketData->PreOpenInterest;
+	double	PreOpenInterest = (pDepthMarketData->PreOpenInterest> 1000000000000000) ? 0 : pDepthMarketData->PreOpenInterest;
 	///今开盘
-	double	OpenPrice = pDepthMarketData->OpenPrice;
+	double	OpenPrice = (pDepthMarketData->OpenPrice> 1000000000000000) ? 0 : pDepthMarketData->OpenPrice;
 	///最高价
-	double	HighestPrice = pDepthMarketData->HighestPrice;
+	double	HighestPrice = (pDepthMarketData->HighestPrice> 1000000000000000) ? 0 : pDepthMarketData->HighestPrice;
 	///最低价
-	double	LowestPrice = pDepthMarketData->LowestPrice;
+	double	LowestPrice = (pDepthMarketData->LowestPrice> 1000000000000000) ? 0 : pDepthMarketData->LowestPrice;
 	///数量
 	double	Volume = pDepthMarketData->Volume;
 	///成交金额
@@ -304,13 +306,66 @@ void MdSpi::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketDat
 	double	AveragePrice = pDepthMarketData->AveragePrice;
 	///业务日期
 	string	ActionDay = pDepthMarketData->ActionDay;
-	
 
-	OpreationFile Marketfile;
-	fstream Mkfile;
-	Marketfile.openfile(Mkfile,"market.txt");
-	Marketfile.writeInfo(Mkfile, info);
-	Marketfile.closefile(Mkfile);
+
+	trasition trasition;
+	string str = trasition.intToString(getMarketnum) + ", "+ InstrumentID ;
+
+	fstream writefile("market2.txt",ios_base::out|ios_base::app);
+	if (!writefile.fail())
+	{
+		writefile.setf(ios::left);
+		writefile << fixed<<setprecision(2);
+		writefile << setw(9) << trasition.intToString(getMarketnum) + ": "
+			<< setw(18) << pDepthMarketData->InstrumentID << ", " 
+			<< setw(15) << LastPrice << ", " 
+			<< setw(15) << PreSettlementPrice << ", " 
+			<< setw(15) << PreClosePrice << ", "
+			<< setw(15) << PreOpenInterest << ", " 
+			<< setw(15) << OpenPrice << ", " 
+			<< setw(15) << HighestPrice << ", " 
+			<< setw(15) << LowestPrice << ", " 
+			<< setw(15) << pDepthMarketData->Volume << ", " 
+			<< setw(15) << pDepthMarketData->Turnover << ", "
+			<< setw(15) << pDepthMarketData->OpenInterest << ", "
+			<< setw(15) << pDepthMarketData->ClosePrice << ", " 
+			<< setw(15) << pDepthMarketData->SettlementPrice << ", " 
+			<< setw(15) << pDepthMarketData->UpperLimitPrice << ", "
+			<< setw(15) << pDepthMarketData->LowerLimitPrice << ", "
+			<< setw(15) << pDepthMarketData->PreDelta << ", "
+			<< setw(15) << pDepthMarketData->CurrDelta << ", "
+			<< setw(15) << pDepthMarketData->UpdateTime << ", "
+			<< setw(15) << pDepthMarketData->UpdateMillisec << ", "
+			<< setw(15) << pDepthMarketData->BidPrice1 << ", "
+			<< setw(15) << pDepthMarketData->BidVolume1 << ", "
+			<< setw(15) << pDepthMarketData->AskPrice1 << ", "
+			<< setw(15) << pDepthMarketData->AskVolume1 << ", "
+			<< setw(15) << pDepthMarketData->BidPrice2 << ", "
+			<< setw(15) << pDepthMarketData->BidVolume2 << ", "
+			<< setw(15) << pDepthMarketData->AskPrice2 << ", "
+			<< setw(15) << pDepthMarketData->AskVolume2 << ", "
+			<< setw(15) << pDepthMarketData->BidPrice3 << ", "
+			<< setw(15) << pDepthMarketData->BidVolume3 << ", "
+			<< setw(15) << pDepthMarketData->AskPrice3 << ", "
+			<< setw(15) << pDepthMarketData->AskVolume3 << ", "
+			<< setw(15) << pDepthMarketData->BidPrice4 << ", "
+			<< setw(15) << pDepthMarketData->BidVolume4 << ", "
+			<< setw(15) << pDepthMarketData->AskPrice4 << ", "
+			<< setw(15) << pDepthMarketData->AskVolume4 << ", "
+			<< setw(15) << pDepthMarketData->BidVolume5 << ", "
+			<< setw(15) << pDepthMarketData->AskPrice5 << ", "
+			<< setw(15) << pDepthMarketData->AskVolume5 << ", "
+			<< setw(15) << pDepthMarketData->AveragePrice << ", "
+			<< setw(15) << pDepthMarketData->ActionDay
+			<< endl;
+
+	}
+	else
+	{
+		log_Md.log("open market file fail!");
+	}
+
+	writefile.close();
 
 }
 

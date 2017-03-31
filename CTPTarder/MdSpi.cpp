@@ -239,79 +239,80 @@ void MdSpi::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketDat
 	///最高价
 	double	HighestPrice = (pDepthMarketData->HighestPrice> 1000000000000000) ? 0 : pDepthMarketData->HighestPrice;
 	///最低价
-	double	LowestPrice = (pDepthMarketData->LowestPrice> 1000000000000000) ? 0 : pDepthMarketData->LowestPrice;
+	double	LowestPrice = (pDepthMarketData->LowestPrice > 1000000000000000) ? 0 : pDepthMarketData->LowestPrice;
 	///数量
-	double	Volume = pDepthMarketData->Volume;
+	int	Volume = pDepthMarketData->Volume> 1000000000000000;
 	///成交金额
-	double	Turnover = pDepthMarketData->Turnover;
+	double	Turnover = (pDepthMarketData->Turnover> 1000000000000000) ? 0 : pDepthMarketData->Turnover;
 	///持仓量
-	double	OpenInterest = pDepthMarketData->OpenInterest;
+	double	OpenInterest = (pDepthMarketData->OpenInterest> 1000000000000000) ? 0 : pDepthMarketData->OpenInterest;
 	///今收盘
-	double	ClosePrice = pDepthMarketData->ClosePrice;
+	double	ClosePrice = (pDepthMarketData->ClosePrice> 1000000000000000) ? 0 : pDepthMarketData->ClosePrice;
 	///本次结算价
-	double	SettlementPrice = pDepthMarketData->SettlementPrice;
+	double	SettlementPrice = (pDepthMarketData->SettlementPrice> 1000000000000000) ? 0 : pDepthMarketData->SettlementPrice;
 	///涨停板价
-	double	UpperLimitPrice = pDepthMarketData->UpperLimitPrice;
+	double	UpperLimitPrice = (pDepthMarketData->UpperLimitPrice> 1000000000000000) ? 0 : pDepthMarketData->UpperLimitPrice;
 	///跌停板价
-	double	LowerLimitPrice = pDepthMarketData->LowerLimitPrice;
+	double	LowerLimitPrice = (pDepthMarketData->LowerLimitPrice> 1000000000000000) ? 0 : pDepthMarketData->LowerLimitPrice;
 	///昨虚实度
-	double	PreDelta = pDepthMarketData->PreDelta;
+	double	PreDelta = (pDepthMarketData->PreDelta> 1000000000000000) ? 0 : pDepthMarketData->PreDelta;
 	///今虚实度
-	double	CurrDelta = pDepthMarketData->CurrDelta;
+	double	CurrDelta = (pDepthMarketData->CurrDelta> 1000000000000000) ? 0 : pDepthMarketData->CurrDelta;
 	///最后修改时间
 	string	UpdateTime = pDepthMarketData->UpdateTime;
 	///最后修改毫秒
 	int	UpdateMillisec = pDepthMarketData->UpdateMillisec;
 	///申买价一
-	double	BidPrice1 = pDepthMarketData->BidPrice1;
+	double	BidPrice1 = (pDepthMarketData->BidPrice1> 1000000000000000) ? 0 : pDepthMarketData->BidPrice1;
 	///申买量一
 	int	BidVolume1 = pDepthMarketData->BidVolume1;
 	///申卖价一
-	double	AskPrice1 = pDepthMarketData->AskPrice1;
+	double	AskPrice1 = (pDepthMarketData->AskPrice1> 1000000000000000) ? 0 : pDepthMarketData->AskPrice1;
 	///申卖量一
 	int	AskVolume1 = pDepthMarketData->AskVolume1;
 	///申买价二
-	double	BidPrice2 = pDepthMarketData->BidPrice2;
+	double	BidPrice2 = (pDepthMarketData->BidPrice2> 1000000000000000) ? 0 : pDepthMarketData->BidPrice2;
 	///申买量二
 	int	BidVolume2 = pDepthMarketData->BidVolume2;
 	///申卖价二
-	double	AskPrice2 = pDepthMarketData->AskPrice2;
+	double	AskPrice2 = (pDepthMarketData->AskPrice2> 1000000000000000) ? 0 : pDepthMarketData->AskPrice2;
 	///申卖量二
 	int	AskVolume2 = pDepthMarketData->AskVolume2;
 	///申买价三
-	double	BidPrice3 = pDepthMarketData->BidPrice3;
+	double	BidPrice3 = (pDepthMarketData->BidPrice3> 1000000000000000) ? 0 : pDepthMarketData->BidPrice3;
 	///申买量三
 	int	BidVolume3 = pDepthMarketData->BidVolume3;
 	///申卖价三
-	double	AskPrice3 = pDepthMarketData->AskPrice3;
+	double	AskPrice3 = (pDepthMarketData->AskPrice3> 1000000000000000) ? 0 : pDepthMarketData->AskPrice3;
 	///申卖量三
 	int	AskVolume3 = pDepthMarketData->AskVolume3;
 	///申买价四
-	double	BidPrice4 = pDepthMarketData->BidPrice4;
+	double	BidPrice4 = (pDepthMarketData->BidPrice4> 1000000000000000) ? 0 : pDepthMarketData->BidPrice4;
 	///申买量四
 	int	BidVolume4 = pDepthMarketData->BidVolume4;
 	///申卖价四
-	double	AskPrice4 = pDepthMarketData->AskPrice4;
+	double	AskPrice4 = (pDepthMarketData->AskPrice4> 1000000000000000) ? 0 : pDepthMarketData->AskPrice4;
 	///申卖量四
 	int	AskVolume4 = pDepthMarketData->AskVolume4;
 	///申买价五
-	double	BidPrice5 = pDepthMarketData->BidPrice5;
+	double	BidPrice5 = (pDepthMarketData->BidPrice5> 1000000000000000) ? 0 : pDepthMarketData->BidPrice5;
 	///申买量五
 	int	BidVolume5 = pDepthMarketData->BidVolume5;
 	///申卖价五
-	double	AskPrice5 = pDepthMarketData->AskPrice5;
+	double	AskPrice5 = (pDepthMarketData->AskPrice5> 1000000000000000) ? 0 : pDepthMarketData->AskPrice5;
 	///申卖量五
 	int	AskVolume5 = pDepthMarketData->AskVolume5;
 	///当日均价
-	double	AveragePrice = pDepthMarketData->AveragePrice;
+	double	AveragePrice = (pDepthMarketData->AveragePrice> 1000000000000000) ? 0 : pDepthMarketData->AveragePrice;
 	///业务日期
 	string	ActionDay = pDepthMarketData->ActionDay;
 
-
+	//int转 string
 	trasition trasition;
 	string str = trasition.intToString(getMarketnum) + ", "+ InstrumentID ;
 
-	fstream writefile("market2.txt",ios_base::out|ios_base::app);
+	//写入文件
+	fstream writefile("market.txt",ios_base::out|ios_base::app);
 	if (!writefile.fail())
 	{
 		writefile.setf(ios::left);
@@ -325,38 +326,38 @@ void MdSpi::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketDat
 			<< setw(15) << OpenPrice << ", " 
 			<< setw(15) << HighestPrice << ", " 
 			<< setw(15) << LowestPrice << ", " 
-			<< setw(15) << pDepthMarketData->Volume << ", " 
-			<< setw(15) << pDepthMarketData->Turnover << ", "
-			<< setw(15) << pDepthMarketData->OpenInterest << ", "
-			<< setw(15) << pDepthMarketData->ClosePrice << ", " 
-			<< setw(15) << pDepthMarketData->SettlementPrice << ", " 
-			<< setw(15) << pDepthMarketData->UpperLimitPrice << ", "
-			<< setw(15) << pDepthMarketData->LowerLimitPrice << ", "
-			<< setw(15) << pDepthMarketData->PreDelta << ", "
-			<< setw(15) << pDepthMarketData->CurrDelta << ", "
-			<< setw(15) << pDepthMarketData->UpdateTime << ", "
-			<< setw(15) << pDepthMarketData->UpdateMillisec << ", "
-			<< setw(15) << pDepthMarketData->BidPrice1 << ", "
-			<< setw(15) << pDepthMarketData->BidVolume1 << ", "
-			<< setw(15) << pDepthMarketData->AskPrice1 << ", "
-			<< setw(15) << pDepthMarketData->AskVolume1 << ", "
-			<< setw(15) << pDepthMarketData->BidPrice2 << ", "
-			<< setw(15) << pDepthMarketData->BidVolume2 << ", "
-			<< setw(15) << pDepthMarketData->AskPrice2 << ", "
-			<< setw(15) << pDepthMarketData->AskVolume2 << ", "
-			<< setw(15) << pDepthMarketData->BidPrice3 << ", "
-			<< setw(15) << pDepthMarketData->BidVolume3 << ", "
-			<< setw(15) << pDepthMarketData->AskPrice3 << ", "
-			<< setw(15) << pDepthMarketData->AskVolume3 << ", "
-			<< setw(15) << pDepthMarketData->BidPrice4 << ", "
-			<< setw(15) << pDepthMarketData->BidVolume4 << ", "
-			<< setw(15) << pDepthMarketData->AskPrice4 << ", "
-			<< setw(15) << pDepthMarketData->AskVolume4 << ", "
-			<< setw(15) << pDepthMarketData->BidVolume5 << ", "
-			<< setw(15) << pDepthMarketData->AskPrice5 << ", "
-			<< setw(15) << pDepthMarketData->AskVolume5 << ", "
-			<< setw(15) << pDepthMarketData->AveragePrice << ", "
-			<< setw(15) << pDepthMarketData->ActionDay
+			<< setw(15) << Volume << ", " 
+			<< setw(15) << Turnover << ", "
+			<< setw(15) << OpenInterest << ", "
+			<< setw(15) << ClosePrice << ", " 
+			<< setw(15) << SettlementPrice << ", " 
+			<< setw(15) << UpperLimitPrice << ", "
+			<< setw(15) << LowerLimitPrice << ", "
+			<< setw(15) << PreDelta << ", "
+			<< setw(15) << CurrDelta << ", "
+			<< setw(15) << UpdateTime << ", "
+			<< setw(15) << UpdateMillisec << ", "
+			<< setw(15) << BidPrice1 << ", "
+			<< setw(15) << BidVolume1 << ", "
+			<< setw(15) << AskPrice1 << ", "
+			<< setw(15) << AskVolume1 << ", "
+			<< setw(15) << BidPrice2 << ", "
+			<< setw(15) << BidVolume2 << ", "
+			<< setw(15) << AskPrice2 << ", "
+			<< setw(15) << AskVolume2 << ", "
+			<< setw(15) << BidPrice3 << ", "
+			<< setw(15) << BidVolume3 << ", "
+			<< setw(15) << AskPrice3 << ", "
+			<< setw(15) << AskVolume3 << ", "
+			<< setw(15) << BidPrice4 << ", "
+			<< setw(15) << BidVolume4 << ", "
+			<< setw(15) << AskPrice4 << ", "
+			<< setw(15) << AskVolume4 << ", "
+			<< setw(15) << BidVolume5 << ", "
+			<< setw(15) << AskPrice5 << ", "
+			<< setw(15) << AskVolume5 << ", "
+			<< setw(15) << AveragePrice << ", "
+			<< setw(15) << ActionDay
 			<< endl;
 
 	}

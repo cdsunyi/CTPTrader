@@ -156,7 +156,8 @@ void TraderSqi::OnRspQryInstrument(CThostFtdcInstrumentField *pInstrument, CThos
 		for (it = vec.begin(); it != vec.end(); it++)
 		{
 			//cout << *it << endl;
-			
+
+
 			for (int i = 0; i < (*it).length(); i++)
 				s[j][i] = (*it)[i];
 			s[j][(*it).length()] = '\0';
@@ -165,6 +166,28 @@ void TraderSqi::OnRspQryInstrument(CThostFtdcInstrumentField *pInstrument, CThos
 			j++;
 		}
 		p_InstrumentNum = traderInstrumentNum;
+
+		//将合约信息写入instrumentfile.txt文件
+		OpreationFile instrumentfile;
+		fstream instrumentfiletxt;
+		//判断打开文件是否成功
+
+		if (!instrumentfile.openfile(instrumentfiletxt, "instrumentfile.txt"))
+		{
+			log_TD.log("instrumentfile.txt文件打开失败！");
+		}
+
+		//排序
+		sort(vec.begin(), vec.end(), less<string>());
+		for (it = vec.begin(); it != vec.end(); it++)
+		{
+			//写入文件信息
+			instrumentfile.writeInfo(instrumentfiletxt, *it);
+		}
+
+		//关闭文件
+		instrumentfile.closefile(instrumentfiletxt);
+
 	}
 
 }
@@ -197,4 +220,11 @@ void TraderSqi::setTraderInstrumentIDinfo(TThostFtdcInstrumentIDType instrument)
 vector <string> TraderSqi::getTraderInstrumentIDinfo()
 {
 	return TraderInstrumentID;
+}
+
+int TraderSqi::compare( void *a,  void *b)
+{
+	char *s1 = (char *)a;
+	char *s2 = (char *)b;
+	return strcmp(s1, s2);
 }

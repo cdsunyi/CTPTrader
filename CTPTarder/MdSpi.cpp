@@ -67,7 +67,7 @@ MdSpi::MdSpi()
 
 MdSpi::~MdSpi()
 {
-
+	
 }
 
 ///当客户端与交易后台建立起通信连接时（还未登录前），该方法被调用。
@@ -119,8 +119,9 @@ void MdSpi::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin, CThostFtd
 
 		while (p_InstrumentNum == 0)
 		{
-			
+			Sleep(1000);
 		}
+		//char* p_TMInstrumentID_test[] = {"IF1706","IF1709","IF1704","IF1705","IH1705","IC1705"};
 		// 请求订阅行情
 		pUserMdApi->SubscribeMarketData(p_TMInstrumentID, p_InstrumentNum);
 
@@ -307,30 +308,42 @@ void MdSpi::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketDat
 	///业务日期
 	string	ActionDay = pDepthMarketData->ActionDay;
 
+
+	SYSTEMTIME folder;
+	GetLocalTime(&folder);
+	stringstream streamFolder;
+	char folderpath[100];
+	streamFolder << "data\\" << folder.wYear << setw(2) << setfill('0') << folder.wMonth << setw(2) << setfill('0') << folder.wDay;
+	streamFolder >> folderpath;
+
+	_mkdir("data");
+	_mkdir(folderpath);	 //创建存放数据的文件夹，如果文件夹存在则不创建，如果不存在则创建；
+
 	//int转 string
 	trasition trasition;
 	string str = trasition.intToString(getMarketnum) + ", "+ InstrumentID ;
 
+	string InstrumentIDdir =  "\\" + InstrumentID+".txt";
 	//写入文件
-	fstream writefile("market.txt",ios_base::out|ios_base::app);
+	fstream writefile(folderpath + InstrumentIDdir, ios_base::out | ios_base::app);
 	if (!writefile.fail())
 	{
 		writefile.setf(ios::left);
 		writefile << fixed<<setprecision(2);
-		writefile << setw(9) << trasition.intToString(getMarketnum) + ": "
-			<< setw(18) << pDepthMarketData->InstrumentID << ", " 
-			<< setw(15) << LastPrice << ", " 
-			<< setw(15) << PreSettlementPrice << ", " 
+		writefile << setw(9) << log_Md.gethour() + ": "
+			<< setw(18) << pDepthMarketData->InstrumentID << ", "
+			<< setw(15) << LastPrice << ", "
+			<< setw(15) << PreSettlementPrice << ", "
 			<< setw(15) << PreClosePrice << ", "
-			<< setw(15) << PreOpenInterest << ", " 
-			<< setw(15) << OpenPrice << ", " 
-			<< setw(15) << HighestPrice << ", " 
-			<< setw(15) << LowestPrice << ", " 
-			<< setw(15) << Volume << ", " 
+			<< setw(15) << PreOpenInterest << ", "
+			<< setw(15) << OpenPrice << ", "
+			<< setw(15) << HighestPrice << ", "
+			<< setw(15) << LowestPrice << ", "
+			<< setw(15) << Volume << ", "
 			<< setw(15) << Turnover << ", "
 			<< setw(15) << OpenInterest << ", "
-			<< setw(15) << ClosePrice << ", " 
-			<< setw(15) << SettlementPrice << ", " 
+			<< setw(15) << ClosePrice << ", "
+			<< setw(15) << SettlementPrice << ", "
 			<< setw(15) << UpperLimitPrice << ", "
 			<< setw(15) << LowerLimitPrice << ", "
 			<< setw(15) << PreDelta << ", "
@@ -360,6 +373,48 @@ void MdSpi::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketDat
 			<< setw(15) << ActionDay
 			<< endl;
 
+		/*writefile << setw(9) << trasition.intToString(getMarketnum) + ": "
+			<< setw(18) << pDepthMarketData->InstrumentID << ", "
+			<< setw(15) << "最新价:" << LastPrice << ", "
+			<< setw(15) <<  "上次结算价:" << PreSettlementPrice << ", "
+			<< setw(15) << "昨收盘:"  << PreClosePrice << ", "
+			<< setw(15) << "昨持仓量:"  << PreOpenInterest << ", "
+			<< setw(15) << "今开盘:"  << OpenPrice << ", "
+			<< setw(15) << "最高价:" << HighestPrice << ", "
+			<< setw(15) << "最低价:" << LowestPrice << ", "
+			<< setw(15) << "数量:" << Volume << ", "
+			<< setw(15) << "成交金额:" << Turnover << ", "
+			<< setw(15) << "持仓量:" << OpenInterest << ", "
+			<< setw(15) << "今收盘:" << ClosePrice << ", "
+			<< setw(15) << "本次结算价:" << SettlementPrice << ", "
+			<< setw(15) << "涨停板价:" << UpperLimitPrice << ", "
+			<< setw(15) << "跌停板价:" << LowerLimitPrice << ", "
+			<< setw(15) << "昨虚实度:" << PreDelta << ", "
+			<< setw(15) << "今虚实度:" << CurrDelta << ", "
+			<< setw(15) << "最后修改时间:" << UpdateTime << ", "
+			<< setw(15) << "最后修改毫秒:" << UpdateMillisec << ", "
+			<< setw(15) << "申买价一:" << BidPrice1 << ", "
+			<< setw(15) << "申买量一:" << BidVolume1 << ", "
+			<< setw(15) << "申卖价一:" << AskPrice1 << ", "
+			<< setw(15) << "申卖量一:" << AskVolume1 << ", "
+			<< setw(15) << ":" << BidPrice2 << ", "
+			<< setw(15) << ":" << BidVolume2 << ", "
+			<< setw(15) << ":" << AskPrice2 << ", "
+			<< setw(15) << ":" << AskVolume2 << ", "
+			<< setw(15) << ":" << BidPrice3 << ", "
+			<< setw(15) << ":" << BidVolume3 << ", "
+			<< setw(15) << ":" << AskPrice3 << ", "
+			<< setw(15) << ":" << AskVolume3 << ", "
+			<< setw(15) << ":" << BidPrice4 << ", "
+			<< setw(15) << ":" << BidVolume4 << ", "
+			<< setw(15) << ":" << AskPrice4 << ", "
+			<< setw(15) << ":" << AskVolume4 << ", "
+			<< setw(15) << ":" << BidVolume5 << ", "
+			<< setw(15) << ":" << AskPrice5 << ", "
+			<< setw(15) << ":" << AskVolume5 << ", "
+			<< setw(15) << ":" << AveragePrice << ", "
+			<< setw(15) << "当日均价:" << ActionDay
+			<< endl;*/
 	}
 	else
 	{

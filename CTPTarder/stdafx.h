@@ -56,5 +56,7 @@
 #include <set>
 #include <fstream>
 #include <iomanip>
+#include <algorithm>
+#include <direct.h>
 
 using namespace std;

@@ -41,6 +41,7 @@
 #include "ThostFtdcTraderApi.h"
 #include "ctpLog.h"
 #include "transition.h"
+#include "OpreationFile.h"
 
 class TraderSqi : public CThostFtdcTraderSpi
 {
@@ -80,6 +81,8 @@ public:
 
 	//返回合约信息
 	vector <string>getTraderInstrumentIDinfo();
+
+	int compare( void *a,  void *b);
 
 private:
 	//合约数量

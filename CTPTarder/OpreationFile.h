@@ -67,7 +67,7 @@ public:
 	// Date:      2017/03/30
 	// Access:    public 
 	// Returns:   bool
-	// declaration: 网文件中写入信息 写入成功返回true 失败： false
+	// declaration: 往文件中写入信息 写入成功返回true 失败： false
 	// Parameter: fstream & files
 	// Parameter: string info
 	//************************************

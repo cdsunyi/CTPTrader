@@ -27,13 +27,13 @@
     <ClCompile Include="TraderSpi.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="ctpLog.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="transition.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="OpreationFile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ctpLog.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

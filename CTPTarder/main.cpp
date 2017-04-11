@@ -60,6 +60,10 @@ char FRONT_ADDR[] = "tcp://192.168.71.21:42205";
 int iRequestID = 0;
 // 行情请求编号
 int iRequestID_md = 0;
+//log文件夹地址
+string logFolderPathStr = "./log";
+//log文件TXT地址
+string logTxtPathStr = "./log/log.txt";
 
 //合约 test
 //multiset <string> TraderInstrumentID_test;
@@ -110,7 +114,6 @@ int main(int argc, char* argv[])
 	{
 	cout << test[j] << endl;
 	}*/
-
 
 
 	return 0;

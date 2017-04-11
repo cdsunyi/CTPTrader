@@ -71,6 +71,26 @@ public:
 	//************************************
 	void setlogType(string type);
 
+	//************************************
+	// Method:    getdate
+	// FullName:  compressFile::getdate
+	// Date:      2017/04/10
+	// Access:    public 
+	// Returns:   std::string
+	// declaration: 获得日期
+	//************************************
+	string getdate();
+
+	//************************************
+	// Method:    getdate
+	// FullName:  compressFile::getdate
+	// Date:      2017/04/10
+	// Access:    public 
+	// Returns:   std::string
+	// declaration: 获得时间
+	//************************************
+	string gethour();
+
 private:
 	string logType;
 };
